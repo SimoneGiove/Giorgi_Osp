@@ -1,0 +1,541 @@
+/* Stile generale navbar */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('../img/ospedale.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.navbar {
+    background-color: #0073aa;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+}
+
+.logo {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+}
+
+.nav-links a:hover {
+    background-color: #005b87;
+}
+
+/* Menu a tendina */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #0073aa;
+    min-width: 180px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu li a {
+    padding: 10px 15px;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #005b87;
+}
+
+/* Mostra menu al passaggio del mouse */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.descrizione-ospedale {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 30px 40px;
+    line-height: 1.6;
+    color: #333;
+    transition: all 0.3s ease;  /* transizione fluida */
+}
+
+/* Titolo */
+.descrizione-ospedale h2 {
+    color: #0073aa;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Paragrafi */
+.descrizione-ospedale p {
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+/* Effetto "rialzo" al passaggio del mouse */
+.descrizione-ospedale:hover {
+    transform: translateY(-10px);               /* si sposta verso l’alto */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* ombra più intensa */
+}
+
+.home-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;          /* spazio tra i pulsanti */
+    margin: 50px 0;     /* distanza dai contenuti */
+    flex-wrap: wrap;    /* responsive su schermi piccoli */
+}
+
+.home-btn {
+    background-color: #0073aa;
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.home-btn:hover {
+    background-color: #006699;
+    transform: scale(1.05);
+}
+
+.doc-btn {
+    background-color: #0073aa;
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;  /* Mantiene il pulsante nel flusso del documento */
+    margin-top: 10px;       /* Aggiungi uno spazio sopra il pulsante per separarlo dal testo */
+    text-align: center;     /* Assicura che il testo del pulsante sia centrato */
+}
+
+.doc-btn:hover {
+    background-color: #006699;
+    transform: scale(1.05);
+}
+
+
+
+/* FOOTER FISSO IN BASSO - VERSIONE COMPATTA */
+.footer {
+    background-color: #0073aa;
+    color: white;
+    padding: 10px 15px;   /* ridotto rispetto a 20px */
+    font-family: Arial, sans-serif;
+    font-size: 13px;      /* leggermente più piccolo */
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.2); /* leggermente più sottile */
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.footer-info, .footer-links, .footer-social {
+    flex: 1 1 300px;
+    margin: 5px; /* ridotto rispetto a 10px */
+}
+
+.footer h3, .footer h4 {
+    color: #fff;
+    margin-bottom: 5px; /* più compatto */
+    font-size: 14px;    /* ridotto */
+}
+
+.footer-links li {
+    margin-bottom: 4px; /* ridotto */
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 0.8em;  /* leggermente più piccolo */
+    color: #e0e0e0;
+    margin-top: 5px;    /* ridotto */
+}
+
+/* Hover rimane uguale */
+.footer:hover {
+    background-color: #006699;
+    transition: background-color 0.3s ease;
+}
+
+/* Aggiusta padding body in base all'altezza del nuovo footer */
+body {
+    padding-bottom: 80px; /* ridotto rispetto a 140px */
+}
+
+.doctors-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;          /* spazio tra i container */
+    flex-wrap: wrap;    /* responsive per schermi piccoli */
+    margin: 40px 0;
+}
+
+.doctor-card {
+    background-color: #f0f8ff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.doctor-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.doctor-card h3 {
+    margin-bottom: 10px;
+    color: #0073aa;
+}
+
+.doctor-card p {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.doctor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Rimuove la sottolineatura e il colore blu dai link */
+a {
+    text-decoration: none;   /* Rimuove la sottolineatura */
+    color: inherit;          /* Usa il colore del testo circostante (logo e menu) */
+}
+
+/* Stile del logo */
+.logo a {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;          /* Colore personalizzato per il logo */
+}
+
+/* Stile del menu a tendina */
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links .dropdown {
+    position: relative;
+}
+
+.nav-links .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 137%;
+    left: -125px;  /* Sposta il dropdown 20px più a sinistra */
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    width: 150px;
+    z-index: 1;
+}
+
+
+.nav-links .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Stile dei link nel menu a tendina */
+.nav-links .dropdown-menu a {
+    color: #333;            /* Colore scuro per i link */
+    padding: 8px;
+    display: block;
+}
+
+.nav-links .dropdown-menu a:hover {
+    background-color: #f0f0f0; /* Hover leggero per il link */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+.paziente {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.paziente h3 {
+    margin: 0 0 10px;
+}
+
+.paziente p {
+    margin: 5px 0;
+}
+
+.btn-visita {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-visita:hover {
+    background-color: #0056b3;
+}
+
+table.appuntamenti {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+}
+
+table.appuntamenti thead {
+    background-color: #3e6fb3;
+    color: white;
+}
+
+table.appuntamenti th, 
+table.appuntamenti td {
+    padding: 10px 14px;
+    border: 1px solid #d0d0d0;
+    text-align: center;
+}
+
+table.appuntamenti tbody tr:nth-child(even) {
+    background-color: #f5f7fa;
+}
+
+table.appuntamenti tbody tr:hover {
+    background-color: #e2ecf9;
+    transition: 0.2s;
+}
+
+table.appuntamenti th {
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+/* ===== PAGINA REGISTRAZIONE ===== */
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 120px;
+}
+
+.register-form {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+    width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.register-form:hover {
+    transform: translateY(-5px);
+}
+
+.register-form h2 {
+    text-align: center;
+    color: #0073aa;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #0073aa;
+    outline: none;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease,
+                transform 0.2s ease;
+}
+
+.register-btn:hover {
+    background-color: #005f8c;
+    transform: scale(1.02);
+}
+
+/* SELECT ROLE */
+
+.form-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: white;
+    transition: border 0.3s ease;
+}
+
+.form-group select:focus {
+    border-color: #0073aa;
+    outline: none;
+} 
+
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.profile-card {
+    background: rgba(255,255,255,0.95);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-8px);
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #0073aa;
+}
+
+.profile-card h2 {
+    color: #0073aa;
+    margin: 10px 0;
+}
+
+.username {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.role {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #0073aa;
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: row;         /* Dispone i figli in linea (orizzontale) */
+    justify-content: center;     /* Centra il gruppo delle due schede nello schermo */
+    align-items: flex-start;     /* Allinea i due blocchi in alto */
+    gap: 40px;                   /* Spazio di distacco tra la scheda profilo e il pannello admin */
+    max-width: 1100px;           /* Larghezza massima complessiva dell'area di lavoro */
+    margin: 60px auto 120px auto;/* Centra il macro-contenitore e lo stacca da navbar e footer */
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.profile-card {
+    background: rgba(255,255,255,0.95);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    width: 300px;                /* Dimensione fissa per il profilo */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;              /* Impedisce al profilo di rimpicciolirsi */
+}
+
+.admin-panel {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+    width: 500px;                /* Dimensione fissa e più larga per il form dell'admin */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    color: #333;
+    flex-shrink: 0;
+}

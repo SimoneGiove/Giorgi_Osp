@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block descrizione %}
+
+<div class="register-container">
+
+    <form class="register-form"
+          method="POST"
+          action="{{ url_for('register') }}"
+          enctype="multipart/form-data">
+
+        <h2>Registrazione Utente</h2>
+
+        {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for msg in messages %}
+        <p style="color: #d40000; display: flex; justify-content: center; align-items: center;">{{ msg }}</p>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+        <!-- RUOLO -->
+        <div class="form-group">
+            <label for="ruolo">Seleziona ruolo</label>
+
+            <select name="ruolo"
+                    id="ruolo"
+                    required
+                    onchange="gestisciRuolo()">
+
+                <option value="">Seleziona</option>
+                <option value="dottore">Dottore</option>
+                <option value="paziente">Paziente</option>
+
+            </select>
+        </div>
+
+        <!-- CAMPI COMUNI -->
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text"
+                   name="username"
+                   id="username"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password"
+                   name="password"
+                   id="password"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text"
+                   name="nome"
+                   id="nome"
+                   required>
+        </div>
+
+        <!-- CAMPI DOTTORE -->
+        <div id="campi-dottore" style="display:none;">
+
+            <div class="form-group">
+                <label for="codice_dottore">Codice Dottore</label>
+                <input type="text"
+                       name="codice_dottore"
+                       id="codice_dottore">
+            </div>
+
+            <div class="form-group">
+                <label for="specializzazione">Specializzazione</label>
+                <input type="text"
+                       name="specializzazione"
+                       id="specializzazione">
+            </div>
+
+        </div>
+
+        <!-- CAMPI PAZIENTE -->
+        <div id="campi-paziente" style="display:none;">
+
+            <div class="form-group">
+                <label for="cf">Codice Fiscale</label>
+                <input type="text"
+                       name="cf"
+                       id="cf"
+                       maxlength="16">
+            </div>
+
+            <div class="form-group">
+                <label for="data_nascita">Data di nascita</label>
+                <input type="date"
+                       name="data_nascita"
+                       id="data_nascita">
+            </div>
+
+        </div>
+
+        <!-- IMMAGINE COMUNE -->
+        <div id="campo-immagine" style="display:none;">
+
+            <div class="form-group">
+                <label for="immagine">Immagine Profilo</label>
+
+                <input type="file"
+                       name="immagine"
+                       id="immagine"
+                       accept="image/*"
+                       onchange="previewImmagine(event)">
+
+                <!-- PREVIEW -->
+                <div class="preview-container">
+
+                    <img id="preview"
+                         src="#"
+                         alt="Preview"
+                         style="display:none;
+                                width:150px;
+                                height:150px;
+                                object-fit:cover;
+                                border-radius:10px;
+                                margin-top:10px;">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button type="submit" class="register-btn">
+            Registrati
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+
+function gestisciRuolo() {
+
+    let ruolo = document.getElementById("ruolo").value;
+
+    let campiDottore = document.getElementById("campi-dottore");
+    let campiPaziente = document.getElementById("campi-paziente");
+    let campoImmagine = document.getElementById("campo-immagine");
+
+    // RESET
+    campiDottore.style.display = "none";
+    campiPaziente.style.display = "none";
+    campoImmagine.style.display = "none";
+
+    // DOTTORE
+    if (ruolo === "dottore") {
+
+        campiDottore.style.display = "block";
+        campoImmagine.style.display = "block";
+    }
+
+    // PAZIENTE
+    else if (ruolo === "paziente") {
+
+        campiPaziente.style.display = "block";
+        campoImmagine.style.display = "block";
+    }
+}
+
+function previewImmagine(event) {
+
+    let input = event.target;
+    let preview = document.getElementById("preview");
+
+    if (input.files && input.files[0]) {
+
+        let reader = new FileReader();
+
+        reader.onload = function(e) {
+
+            preview.src = e.target.result;
+            preview.style.display = "block";
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+</script>
+
+{% endblock %}

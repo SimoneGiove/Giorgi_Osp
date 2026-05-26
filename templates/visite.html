@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block descrizione %}
+<table class="appuntamenti">
+    <thead>
+            <th>Codice Medico</th>
+            <th>Codice Fiscale</th>
+            <th>Data Appuntamento</th>
+            <th>Ora</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for visita in visite %}
+        <tr>  
+            <td>{{ visita.codDoc }}</td>>
+            <td>{{ visita.cfPaz }}</td>
+            <td>{{ visita.data_appuntamento }}</td>
+            <td>{{ visita.ora }}</td>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ospedale G. Giorgi</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="{{url_for('home')}}">Ospedale G. Giorgi</a>
+        </div>
+        
+        <ul class="nav-links">
+            <li class="dropdown">
+                <a href="#">≡</a>
+                <ul class="dropdown-menu">
+                    <a href="{{ url_for('register') }}">Registrati</a> 
+                    {% if session['username'] %}
+                    <a href="{{ url_for('logout') }}">Logout</a> 
+                    {% else %}
+                    <a href="{{ url_for('login') }}">Login</a> 
+                    {% endif %}
+                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    {% block descrizione %}
+    {% endblock %}
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>Ospedale "G. Giorgi”</h3>
+                <p>via Amalfi 6, Brindisi (BR)</p>
+                <p>Telefono: <a href="tel:+393755172579">375 5172579</a></p>
+                <p>Email: <a href="mailto:simonegiove007@gmail.com">simonegiove007@gmail.com</a></p>
+            </div>
+
+            <div class="footer-social">
+                <h4>Seguici</h4>
+                <a href="#">Facebook</a> |
+                <a href="#">Instagram</a> |
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Simone Giove 5DI - Tutti i diritti riservati</p>
+        </div>
+    </footer>
+
+    <script>
+        // Seleziona tutti gli elementi con la classe "dropdown"
+        const dropdowns = document.querySelectorAll('.dropdown');
+    
+        dropdowns.forEach(dropdown => {
+            // Aggiungi un evento di click per aprire e chiudere il menu
+            dropdown.addEventListener('click', function(event) {
+                // Impedisce al click di propagarsi (altrimenti la pagina si ricarica)
+                event.stopPropagation();
+                
+                // Trova il menu a tendina all'interno del dropdown
+                const menu = dropdown.querySelector('.dropdown-menu');
+                
+                // Toggle (cambia stato) la visibilità del menu
+                menu.style.display = (menu.style.display === 'block' ? 'none' : 'block');
+            });
+        });
+    
+        // Quando si clicca al di fuori del dropdown, chiudere i menu
+        document.addEventListener('click', function(event) {
+            dropdowns.forEach(dropdown => {
+                const menu = dropdown.querySelector('.dropdown-menu');
+                if (menu.style.display === 'block' && !dropdown.contains(event.target)) {
+                    menu.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>

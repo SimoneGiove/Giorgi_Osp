@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block descrizione %}
+<div class="container" style="max-width: 800px; margin: 50px auto; padding: 30px; background: rgba(255,255,255,0.95); border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);">
+    
+    <h2 style="color: #0073aa; text-align: center; margin-bottom: 20px;">I Miei Pazienti</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 30px;">Lista dei pazienti che hanno un appuntamento prenotato con lei.</p>
+
+    <div class="patients-list" style="display: flex; flex-direction: column; gap: 15px;">
+        {% for paz in pazienti %}
+            <div class="paziente" style="background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 5px solid #0073aa; color: #333;">
+                <!-- ATTENZIONE AI NOMI DEI CAMPI -->
+                <h3 style="margin: 0 0 10px 0; color: #0073aa;">👤 {{ paz.nome }}</h3>
+                <p style="margin: 5px 0;"><strong>Codice Fiscale:</strong> {{ paz.codice_fiscale }}</p>
+                <p style="margin: 5px 0;"><strong>Data di Nascita:</strong> {{ paz.data_nascita }}</p>
+            </div>
+        {% else %}
+            <div style="text-align: center; padding: 30px; background: #f9f9f9; border-radius: 8px; border: 1px dashed #ccc;">
+                <p style="font-weight: bold; color: #777; margin: 0;">Nessun paziente trovato.</p>
+                <p style="color: #999; font-size: 14px; margin-top: 5px;">Non ci sono appuntamenti registrati a suo nome nel sistema.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

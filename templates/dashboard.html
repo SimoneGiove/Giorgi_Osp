@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block descrizione %}
+
+<div class="dashboard-container" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <div class="profile-card" style="text-align: center; border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+        <img class="profile-img" src="{{ url_for('static', filename='img/' + immagine) }}" alt="Profilo" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+
+        <h2>{{ nome }}</h2>
+        <p class="username">@{{ username }}</p>
+        <span class="role" style="background: #e11d48; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.9em; font-weight: bold;">
+            {{ ruolo | upper }}
+        </span>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p style="color: #d40000; text-align: center; font-weight: bold;">{{ msg }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% if session.get('ruolo') == 'admin' %}
+        <div class="admin-panel" style="border: 1px solid #ccc; padding: 25px; border-radius: 8px; background-color: #f9f9f9;">
+            <h3>🛠️ Pannello Amministratore: Pianifica Appuntamento</h3>
+            <hr>
+            
+            <form action="{{ url_for('crea_appuntamento') }}" method="POST" style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
+                
+                <div class="form-group" style="display: flex; flex-direction: column;">
+                    <label for="codDoc" style="font-weight: bold; margin-bottom: 5px;">Seleziona Dottore:</label>
+                    <select name="codDoc" id="codDoc" required style="padding: 10px; border-radius: 4px; border: 1px solid #aaa;">
+                        <option value="">-- Scegli un medico --</option>
+                        {% for doc in dottori %}
+                            <option value="{{ doc.codice_dottore }}">Dr. {{ doc.nome }} ({{ doc.codice_dottore }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group" style="display: flex; flex-direction: column;">
+                    <label for="cfPaz" style="font-weight: bold; margin-bottom: 5px;">Seleziona Paziente:</label>
+                    <select name="cfPaz" id="cfPaz" required style="padding: 10px; border-radius: 4px; border: 1px solid #aaa;">
+                        <option value="">-- Scegli un paziente --</option>
+                        {% for paz in pazienti %}
+                            <option value="{{ paz.codice_fiscale }}">{{ paz.nome }} - {{ paz.codice_fiscale }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div style="display: flex; gap: 20px;">
+                    <div class="form-group" style="display: flex; flex-direction: column; flex: 1;">
+                        <label for="data_appuntamento" style="font-weight: bold; margin-bottom: 5px;">Data:</label>
+                        <input type="date" name="data_appuntamento" id="data_appuntamento" required style="padding: 10px; border-radius: 4px; border: 1px solid #aaa;">
+                    </div>
+
+                    <div class="form-group" style="display: flex; flex-direction: column; flex: 1;">
+                        <label for="ora" style="font-weight: bold; margin-bottom: 5px;">Ora:</label>
+                        <input type="time" name="ora" id="ora" required style="padding: 10px; border-radius: 4px; border: 1px solid #aaa;">
+                    </div>
+                </div>
+
+                <button type="submit" style="background-color: #007bff; color: white; padding: 12px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px;">
+                    ➕ Registra Appuntamento
+                </button>
+            </form>
+
+            <div style="margin-top: 20px; text-align: center;">
+                <a href="{{ url_for('visite', codice='none') }}" style="color: #007bff; font-weight: bold; text-decoration: none;">
+                    🔍 Visualizza il tabellone globale di tutte le visite
+                </a>
+            </div>
+        </div>
+
+    {% else %}
+        <div class="dashboard-actions" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+            {% if session.get('ruolo') == 'dottore' %}
+                <a href="{{ url_for('visite', codice=session.get('codice_dottore')) }}" class="btn" style="background-color: #28a745; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                    📅 I Miei Appuntamenti
+                </a>
+                <a href="{{ url_for('pazienti') }}" class="btn" style="background-color: #17a2b8; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                    👥 Visualizza Miei Pazienti
+                </a>
+            {% elif session.get('ruolo') == 'paziente' %}
+                <a href="{{ url_for('visite', codice=session.get('cf')) }}" class="btn" style="background-color: #28a745; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                    📅 Le Mie Visite Prenotate
+                </a>
+                <a href="{{ url_for('dottori') }}" class="btn" style="background-color: #17a2b8; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                    🥼 Visualizza Miei Dottori
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+</div>
+{% if session.get('ruolo') == 'admin' %}
+<div class="dashboard-container" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 25px;">
+        <a href="{{ url_for('dottori') }}" style="background-color: #17a2b8; color: white; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; font-size: 14px; transition: background 0.2s;">👨‍⚕️ Tutti i Dottori</a>
+        <a href="{{ url_for('pazienti') }}" style="background-color: #28a745; color: white; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; font-size: 14px; transition: background 0.2s;">👥 Tutti i Pazienti</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
